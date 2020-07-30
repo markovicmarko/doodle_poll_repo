@@ -1,0 +1,23 @@
+version: '3'
+services:
+  mongocontainer:
+    container_name: doodle_poll_mongo_container
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - ./src/main/resources/mongo:/docker-entrypoint-initdb.d
+    command: mongod --port 27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootMM
+      MONGO_INITDB_DATABASE: doodle_poll_db
+
+  mongo_seed:
+      image: mongo:latest
+      links:
+        - mongocontainer
+      volumes:
+        - ./mongo-seed:/mongo-seed
+      command:
+        /mongo-seed/import.sh
