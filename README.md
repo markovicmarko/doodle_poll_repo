@@ -47,4 +47,5 @@ Actuator is used for app health check
  - Improve mongo search to utilize full text search 
  - Add logging
  - Add more tests
+ - Add hateoas links
 
